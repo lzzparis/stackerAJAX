@@ -81,8 +81,25 @@ var getUnanswered = function(tags) {
 	});
 };
 
-// takes a string of semi-colon separated tags to be searched
-// for on StackOverflow
+// this function takes the question object returned by the StackOverflow request
+// and returns new result to be appended to DOM
+var showAnswerer = function(answerer) {
+	
+	console.log("answerer...");
+	// clone our result template code
+	var result = $('.templates .answerer').clone();
+	
+	//set user profile pic
+
+	//set answerer username and link to profile
+	//set answerer reputation
+	//set answerer post count
+	//set answerer score
+
+	return result;
+};
+
+// takes one tag to be searched for on StackOverflow
 var getInspiration = function(tag) {
 	
 	console.log("getInsp:"+tag);
@@ -101,15 +118,12 @@ var getInspiration = function(tag) {
 	})
 	.done(function(result){ //this waits for the ajax to return with a succesful promise object
 		console.log(result);
-		// var searchResults = showSearchResults(request.tagged, result.items.length);
-
-		// $('.search-results').html(searchResults);
-		// //$.each is a higher order function. It takes an array and a function as an argument.
-		// //The function is executed once for each item in the array.
-		// $.each(result.items, function(i, item) {
-		// 	var question = showQuestion(item);
-		// 	$('.results').append(question);
-		// });
+		 //$.each is a higher order function. It takes an array and a function as an argument.
+		 //The function is executed once for each item in the array.
+		 $.each(result.items, function(i, item) {
+		 	var answerer = showAnswerer(item);
+		 	$('.results').append(answerer);
+		 });
 	})
 	.fail(function(jqXHR, error){ //this waits for the ajax to return with an error promise object
 		var errorElem = showError(error);
