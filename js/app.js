@@ -81,6 +81,42 @@ var getUnanswered = function(tags) {
 	});
 };
 
+// takes a string of semi-colon separated tags to be searched
+// for on StackOverflow
+var getInspiration = function(tag) {
+	
+	console.log("getInsp:"+tag);
+	// the parameters we need to pass in our request to StackOverflow's API
+	var request = { 
+		site: 'stackoverflow',
+	};
+	
+	var inspireURL = "http://api.stackexchange.com/2.2/tags/"+tag+"/top-answerers/all_time";
+
+	$.ajax({
+		url: inspireURL,
+		data: request,
+		dataType: "jsonp",//use jsonp to avoid cross origin issues
+		type: "GET",
+	})
+	.done(function(result){ //this waits for the ajax to return with a succesful promise object
+		console.log(result);
+		// var searchResults = showSearchResults(request.tagged, result.items.length);
+
+		// $('.search-results').html(searchResults);
+		// //$.each is a higher order function. It takes an array and a function as an argument.
+		// //The function is executed once for each item in the array.
+		// $.each(result.items, function(i, item) {
+		// 	var question = showQuestion(item);
+		// 	$('.results').append(question);
+		// });
+	})
+	.fail(function(jqXHR, error){ //this waits for the ajax to return with an error promise object
+		var errorElem = showError(error);
+		$('.search-results').append(errorElem);
+	});
+};
+
 
 $(document).ready( function() {
 	$('.unanswered-getter').submit( function(e){
@@ -91,4 +127,14 @@ $(document).ready( function() {
 		var tags = $(this).find("input[name='tags']").val();
 		getUnanswered(tags);
 	});
+
+	$('.inspiration-getter').submit(function(e){
+		e.preventDefault();
+		// zero out results if previous search has run
+		$('.results').html('');
+		// get the value of the tags the user submitted
+		var answerers = $(this).find("input[name='answerers']").val();
+		getInspiration(answerers);
+
+	})
 });
