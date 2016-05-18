@@ -10,6 +10,9 @@
 .left {
 	float: left;
 }
+.right {
+	float: right;
+}
 
 .stack-image {
 	background: url('../images/stack-icon.png') no-repeat center center;
@@ -31,12 +34,6 @@
 	clear: both;
 }
 
-.inspiration dt{ 
-	margin-right: 0.5em;
-}
-.inspiration dd{ 
-	margin-right: 1.5em;
-}
 
 
 .result {
