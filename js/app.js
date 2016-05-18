@@ -90,6 +90,9 @@ var showAnswerer = function(answerer) {
 	var result = $('.templates .answerer').clone();
 	
 	//set user profile pic
+	var picElem = result.find('.profile-pic');
+	picElem.attr('href', answerer.user.link);
+	picElem.children('img').attr('src',answerer.user.profile_image);
 
 	//set answerer username and link to profile
 	//set answerer reputation
