@@ -31,9 +31,13 @@
 	clear: both;
 }
 
-.inspiration { 
-	margin-left: 3em;
+.inspiration dt{ 
+	margin-right: 0.5em;
 }
+.inspiration dd{ 
+	margin-right: 1.5em;
+}
+
 
 .result {
 	border: 1px solid black;

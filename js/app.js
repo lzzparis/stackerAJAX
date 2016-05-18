@@ -85,7 +85,6 @@ var getUnanswered = function(tags) {
 // and returns new result to be appended to DOM
 var showAnswerer = function(answerer) {
 	
-	console.log("answerer...");
 	// clone our result template code
 	var result = $('.templates .answerer').clone();
 	
@@ -95,9 +94,21 @@ var showAnswerer = function(answerer) {
 	picElem.children('img').attr('src',answerer.user.profile_image);
 
 	//set answerer username and link to profile
+	var usernameElem = result.find('.answerer-user a');
+	usernameElem.attr('href', answerer.user.link);
+	usernameElem.text(answerer.user.display_name);
+
 	//set answerer reputation
+	var repElem = result.find('.answerer-rep');
+	repElem.text(answerer.user.reputation);
+
 	//set answerer post count
+	var postElem = result.find('.answerer-post-count');
+	postElem.text(answerer.post_count);
+
 	//set answerer score
+	var scoreElem = result.find('.answerer-score');
+	scoreElem.text(answerer.score);
 
 	return result;
 };
@@ -105,7 +116,6 @@ var showAnswerer = function(answerer) {
 // takes one tag to be searched for on StackOverflow
 var getInspiration = function(tag) {
 	
-	console.log("getInsp:"+tag);
 	// the parameters we need to pass in our request to StackOverflow's API
 	var request = { 
 		site: 'stackoverflow',
@@ -120,7 +130,6 @@ var getInspiration = function(tag) {
 		type: "GET",
 	})
 	.done(function(result){ //this waits for the ajax to return with a succesful promise object
-		console.log(result);
 		 //$.each is a higher order function. It takes an array and a function as an argument.
 		 //The function is executed once for each item in the array.
 		 $.each(result.items, function(i, item) {
